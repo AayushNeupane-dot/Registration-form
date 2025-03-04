@@ -103,5 +103,52 @@
             <button type="submit">Register</button>
         </form>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent default form submission
+                
+                // Get form values
+                const name = document.getElementById("name").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const grade = document.getElementById("grade").value.trim();
+                const position = document.getElementById("position").value;
+                const skills = document.getElementById("skills").value.trim();
+                const interest = document.getElementById("interest").value.trim();
+                
+                // Validate form fields
+                if (!name || !email || !phone || !grade || !position || !interest) {
+                    alert("Please fill in all required fields.");
+                    return;
+                }
+
+                // Email validation
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    alert("Please enter a valid email address.");
+                    return;
+                }
+
+                // Phone validation (basic numeric check)
+                const phonePattern = /^\d{10}$/;
+                if (!phonePattern.test(phone)) {
+                    alert("Please enter a valid 10-digit phone number.");
+                    return;
+                }
+
+                // Confirmation alert before submitting
+                const confirmation = confirm(`Are you sure you want to register with the following details?\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nGrade/Class: ${grade}\nPreferred Position: ${position}\nTechnical Skills: ${skills}\nWhy you want to join: ${interest}`);
+                
+                if (confirmation) {
+                    alert("Registration successful!");
+                    form.reset(); // Reset the form after successful submission
+                }
+            });
+        });
+    </script>
 </body>
 </html>
